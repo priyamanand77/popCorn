@@ -160,7 +160,11 @@ public class MainConfigV1_4_prototype {
 		actions.moveByOffset(400, 0).click().build().perform();
 		actions.keyDown(Keys.LEFT_CONTROL).sendKeys(Keys.HOME).keyUp(Keys.LEFT_CONTROL).build().perform();
 
-	
+		String e = driver.findElement(By.xpath("//*[@id=\"acf-group_tags\"]/div[1]/div/button[3]")).getAttribute("aria-expanded");
+		if(e.equalsIgnoreCase("true"))
+		{
+			driver.findElement(By.xpath("//*[@id=\"acf-group_tags\"]/div[1]/div/button[3]/span[2]")).click();
+		}
 	
 //		actions.moveToElement(e, 500, 0)
 //		.click().build().perform();
@@ -695,11 +699,12 @@ public class MainConfigV1_4_prototype {
 	}
 
 	public static void update() {
-		Actions actions = new Actions(driver);
+//		Actions actions = new Actions(driver);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-		actions.moveByOffset(800, 0).click().build().perform();
-		actions.keyDown(Keys.LEFT_CONTROL).sendKeys(Keys.HOME).build().perform();
-
+//		actions.moveByOffset(800, 0).click().build().perform();
+//		actions.keyDown(Keys.LEFT_CONTROL).sendKeys(Keys.HOME).build().perform();
+		
+		goUp();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("publish")));
 
 		try {
@@ -736,9 +741,138 @@ public class MainConfigV1_4_prototype {
 		InputStreamReader r = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(r);
 
-		String json = "{\r\n"
-				+ "	\"ads_demoMode_print_log_timer\": 20\r\n"
+//		String json = "{\r\n"
+//				+ "	\"fastScrubConfig\": {\r\n"
+//				+ "		\"scrubData\": [{\r\n"
+//				+ "				\"speed\": 1,\r\n"
+//				+ "				\"jump\": 20\r\n"
+//				+ "			},\r\n"
+//				+ "			{\r\n"
+//				+ "				\"speed\": 2,\r\n"
+//				+ "				\"jump\": 40\r\n"
+//				+ "			},\r\n"
+//				+ "			{\r\n"
+//				+ "				\"speed\": 3,\r\n"
+//				+ "				\"jump\": 80\r\n"
+//				+ "			},\r\n"
+//				+ "			{\r\n"
+//				+ "				\"speed\": 4,\r\n"
+//				+ "				\"jump\": 40\r\n"
+//				+ "			}\r\n"
+//				+ "		],\r\n"
+//				+ "		\"one_click_jump\": 20,\r\n"
+//				+ "		\"jump_in_video_for_each_second_long_hold_press\": 180,\r\n"
+//				+ "		\"long_press_threshold\": 1,\r\n"
+//				+ "		\"should_1x_display\": true\r\n"
+//				+ "	}\r\n"
+//				+ "}";
+		String json ="{\r\n"
+				+ "	\"player_features\": {\r\n"
+				+ "		\"skip_recap\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"tv_tray_below_seekbar\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"fast_scrubbing\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"audio_language\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"binge_tray\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"skip_song\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"pinch_zoom\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"download\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"TLM\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"quick_jump\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"share\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"upfront_audio\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"report_an_issue\": {\r\n"
+				+ "			\"enabled\": false\r\n"
+				+ "		},\r\n"
+				+ "		\"custom_CTA\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"skip_credit\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"video_quality\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"scrub_thumbnail\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"skip_intro\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"stats_for_nerds\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"chromecast\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"episodes_collection\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"brightness\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"double_tap_seek\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"volume_control\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"PIP\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"subtitle\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"play_from_beginning\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"mute_unmute\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"next_or_next_episode\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"ad_progressbar\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"auto_binge\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"my_list\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"full_screen\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		},\r\n"
+				+ "		\"idle_screen\": {\r\n"
+				+ "			\"enabled\": true\r\n"
+				+ "		}\r\n"
+				+ "	}\r\n"
 				+ "}";
+		
 		System.out.println();
 		for (Map.Entry<String, String> paiEntry : parent.entrySet()) {
 			System.out.println(paiEntry.getKey() + "->" + paiEntry.getValue());
